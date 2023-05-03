@@ -101,3 +101,29 @@ cv2.imshow('Image GRAY', imgray)
 cv2.waitKey(0)
 
 cv2.destroyAllWindows()
+
+
+
+# given a signal [1,2,3,4 ,5 ] and a kernel [1,2,3] convolve the signal with the kernel centered at each point
+def convolve(signal, kernel):
+    # get the length of the signal and the kernel
+    signal_length = len(signal)
+    kernel_length = len(kernel)
+    # calculate the number of output values
+    output_length = signal_length - kernel_length + 1
+    # create the output signal
+    output = [0 for i in range(output_length)]
+    # for each output index
+    for output_index in range(output_length):
+        # for each kernel index
+        for kernel_index in range(kernel_length):
+            # add the kernel value multiplied by the signal value to the output
+            output[output_index] += kernel[kernel_index] * signal[output_index + kernel_index]
+    # return the output signal
+    return output
+
+signal = [1,2,3,4,5]
+kernel = [1,2,3]
+
+print(convolve(signal, kernel))
+
