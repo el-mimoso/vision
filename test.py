@@ -127,3 +127,21 @@ kernel = [1,2,3]
 
 print(convolve(signal, kernel))
 
+
+def circular_convolution(x, h):
+    N = len(x)
+    M = len(h)
+    L = max(N, M)
+    X = np.fft.fft(x, L)
+    H = np.fft.fft(h, L)
+    Y = X * H
+    y = np.fft.ifft(Y)
+    y = np.real(y[:N])
+    return y
+
+
+x = np.array([7, 8, 1, 4])
+h = np.array([1, 4, 6, 4, 1])
+
+result = circular_convolution(x, h)
+print(result)
